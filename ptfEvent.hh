@@ -68,29 +68,45 @@ class ptfEvent: public TObject
         Double_t GetReciever1Baseline(){return reciever1baseline;}
 	void SetADCSize(Double_t _adcsize){adcsize=_adcsize;}
 	Double_t GetADCSize(){return adcsize;}
-    void SetEventID(Int_t _eventID){eventID = _eventID;}
-    Int_t GetEventID(){return eventID;}
+    	void SetEventID(Int_t _eventID){eventID = _eventID;}
+    	Int_t GetEventID(){return eventID;}
     
-    void AddMonitor0Pulse(Pulse *_pulse){monitor0pulses.push_back(_pulse);}
-    Pulse* GetMonitor0Pulse(Int_t n){if(n>0 && n< monitor0pulses.size()) return monitor0pulses[n]; else return NULL;}
-    Int_t GetMonitor0PulseCount(){return monitor0pulses.size();}
+    	void AddMonitor0Pulse(Pulse *_pulse){monitor0pulses.push_back(_pulse);}
+	void AddMonitor0Pulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt){
+		monitor0pulses.push_back(new PTF::Pulse(_time,_charge,_baseline,_height,_width,_startbin,_maxd,_maxdt,_mind,_mindt));
+	}
+    	Pulse* GetMonitor0Pulse(Int_t n){if(n>=0 && n< monitor0pulses.size()) return monitor0pulses[n]; else return NULL;}
+    	Int_t GetMonitor0PulseCount(){return monitor0pulses.size();}
     
-    void AddMonitor1Pulse(Pulse *_pulse){monitor1pulses.push_back(_pulse);}
-    Pulse* GetMonitor1Pulse(Int_t n){if(n>0 && n< monitor1pulses.size()) return monitor1pulses[n]; else return NULL;}
-    Int_t GetMonitor1PulseCount(){return monitor1pulses.size();}
+    	void AddMonitor1Pulse(Pulse *_pulse){monitor1pulses.push_back(_pulse);}
+	void AddMonitor1Pulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt){
+                monitor1pulses.push_back(new PTF::Pulse(_time,_charge,_baseline,_height,_width,_startbin,_maxd,_maxdt,_mind,_mindt));
+        }
+    	Pulse* GetMonitor1Pulse(Int_t n){if(n>=0 && n< monitor1pulses.size()) return monitor1pulses[n]; else return NULL;}
+    	Int_t GetMonitor1PulseCount(){return monitor1pulses.size();}
     
-    void AddTargetPulse(Pulse *_pulse){targetpmtpulses.push_back(_pulse);}
-    Pulse* GetTargetPulse(Int_t n){if(n>0 && n< targetpmtpulses.size()) return targetpmtpulses[n]; else return NULL;}
-    Int_t GetTargetPulseCount(){return targetpmtpulses.size();}
+    	void AddTargetPulse(Pulse *_pulse){targetpmtpulses.push_back(_pulse);}
+	void AddTargetPulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt){
+        //   	Printf(Form("new target pulse%d %f %f",targetpmtpulses.size(),_time,_charge));     
+		targetpmtpulses.push_back(new PTF::Pulse(_time,_charge,_baseline,_height,_width,_startbin,_maxd,_maxdt,_mind,_mindt));
+        }
+    	Pulse* GetTargetPulse(Int_t n){if(n>=0 && n< targetpmtpulses.size()) return targetpmtpulses[n]; else return NULL;}
+    	Int_t GetTargetPulseCount(){return targetpmtpulses.size();}
     
-    void AddReciever0Pulse(Pulse *_pulse){reciever0pulses.push_back(_pulse);}
-    Pulse* GetReciever0Pulse(Int_t n){if(n>0 && n< reciever0pulses.size()) return reciever0pulses[n]; else return NULL;}
-    Int_t GetReciever0PulseCount(){return reciever0pulses.size();}
+    	void AddReciever0Pulse(Pulse *_pulse){reciever0pulses.push_back(_pulse);}
+	void AddReciever0Pulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt){
+                reciever0pulses.push_back(new PTF::Pulse(_time,_charge,_baseline,_height,_width,_startbin,_maxd,_maxdt,_mind,_mindt));
+        }
+    	Pulse* GetReciever0Pulse(Int_t n){if(n>=0 && n< reciever0pulses.size()) return reciever0pulses[n]; else return NULL;}
+    	Int_t GetReciever0PulseCount(){return reciever0pulses.size();}
     
-    void AddReciever1Pulse(Pulse *_pulse){reciever1pulses.push_back(_pulse);}
-    Pulse* GetReciever1Pulse(Int_t n){if(n>0 && n< reciever1pulses.size()) return reciever1pulses[n]; else return NULL;}
-    Int_t GetReciever1PulseCount(){return reciever1pulses.size();}
-    
+    	void AddReciever1Pulse(Pulse *_pulse){reciever1pulses.push_back(_pulse);}
+	void AddReciever1Pulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt){
+                reciever1pulses.push_back(new PTF::Pulse(_time,_charge,_baseline,_height,_width,_startbin,_maxd,_maxdt,_mind,_mindt));
+        }
+   	Pulse* GetReciever1Pulse(Int_t n){if(n>=0 && n< reciever1pulses.size()) return reciever1pulses[n]; else return NULL;}
+   	Int_t GetReciever1PulseCount(){return reciever1pulses.size();}
+   
 	protected:
 	std::vector<UShort_t> monitor0samples;
 	std::vector<UShort_t> monitor1samples;
@@ -98,7 +114,7 @@ class ptfEvent: public TObject
 	std::vector<UShort_t> reciever0samples;
 	std::vector<UShort_t> reciever1samples;
 	Int_t eventtime;
-    Int_t eventID;
+    	Int_t eventID;
 	TVector3 gantry0position;
 	TVector3 gantry0angle;
 	TVector3 gantry1position;

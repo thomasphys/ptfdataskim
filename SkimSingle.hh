@@ -30,9 +30,18 @@ class SkimSingle: public TRootanaEventLoop {
     TH2F *Charge_Time;
     TH2F *Peak_Time;
     TH1F *SampleWave;
+    TH1F *SampleWaveDeriv;
+    TH1F *SamplePulseFind;
+    TH1F *PulseNum;
+    TH2F *DeltaT_Peak;
+    TH2F *DeltaT_PRatio;
+    TH2F *Peak1_Peak2;
+    TH1F *PeakFixWindow; 
     int counter;
     bool savesamples;
-
+    Int_t DerivThreshold;
+    Int_t SmallDeriv;
+    
     protected:
     PTF::ptfEvent *rootevent;
     TTree *tree;

@@ -13,6 +13,18 @@ class Pulse: public TObject
         width = 0.;
         startbin = 0.;
     }
+    Pulse(Double_t _time,Double_t _charge,Double_t _baseline,Double_t _height,Int_t _width,Int_t _startbin,Int_t _maxd,Int_t _maxdt,Int_t _mind,Int_t _mindt):TObject(){
+    	time = _time;
+	charge = _charge - _baseline*_width;
+        baseline = _baseline;
+        height = _height-_baseline;
+        width = _width;
+        startbin = _startbin;
+        maxd = _maxd;
+        maxdt = _maxdt;
+        mind = _mind;
+        mindt = _mindt;
+    }
     ~Pulse(){}
 	void SetTime(Double_t _time){time=_time;}
 	Double_t GetTime(){return time;}
@@ -26,6 +38,14 @@ class Pulse: public TObject
 	Int_t GetWidth(){return width;}
 	void SetStartBin(Int_t _bin){startbin = _bin;}
 	Int_t GetStartBin(){return startbin;}
+	void SetMaxD(Int_t _maxd){maxd = _maxd;}
+	Int_t GetMaxD(){return maxd;}
+	void SetMaxDTime(Int_t _maxdt){maxdt=_maxdt;}
+	Int_t GetMaxDTTime(){return maxdt;}
+	void SetMinD(Int_t _mind){mind = _mind;}
+	Int_t GetMinD(){return mind;}
+	void SetMinDTime(Int_t _mindt){mindt = _mindt;}
+	Int_t GetMinDTime(){return mindt;}
 
 	protected:
 	Double_t time;
@@ -34,6 +54,10 @@ class Pulse: public TObject
 	Double_t baseline;
 	Int_t width;
 	Int_t startbin;
+	Int_t maxd;
+	Int_t maxdt;
+	Int_t mind;
+	Int_t mindt;
     
     ClassDef(Pulse,0)
 };
